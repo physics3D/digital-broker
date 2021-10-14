@@ -13,12 +13,7 @@
     gameState.set({
       gameStarted: true,
       money: startMoney,
-      stocks: [
-        {
-          name: "Amazon",
-          priceAtBuy: 2439.62,
-        },
-      ],
+      stocks: [],
     });
   }
 </script>

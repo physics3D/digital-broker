@@ -1,12 +1,13 @@
 import { Writable, writable } from "svelte/store";
 
-export type GameState = {
+export interface GameState {
     gameStarted: boolean;
     money: number;
     stocks: Stock[];
 }
 
-export type Stock = {
+export interface Stock {
+    symbol: string;
     name: string;
     priceAtBuy: number;
 }

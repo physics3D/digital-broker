@@ -1,9 +1,11 @@
 <script lang="ts">
   import { APIStock, getStocksList as getStockList } from "../api/api";
 
+  export let onClickStock;
+
   let stockList: APIStock[] = [];
-  getStockList().then((json) => {
-    stockList = JSON.parse(json);
+  let stockListPromise = getStockList().then((json) => {
+    stockList = json;
   });
   let stockQuery: string = "";
 
@@ -28,10 +30,16 @@
   <h2>Buy stocks:</h2>
   <input type="text" bind:value={stockQuery} />
 
+  {#await stockListPromise}
+    <p>Downloading a list of available stocks...</p>
+  {/await}
+
   <table>
     {#each foundStocks as stock}
       <tr>
-        <td>{stock.description}</td>
+        <td>
+          <button on:click={onClickStock(stock)}>{stock.description}</button>
+        </td>
       </tr>
     {/each}
   </table>
