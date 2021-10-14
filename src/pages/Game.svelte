@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { APIStock } from "../api/api";
+
   import StockBuyView from "../components/StockBuyView.svelte";
 
   import StockDetailView from "../components/StockDetailView.svelte";
@@ -32,17 +33,20 @@
     detailedStock = undefined;
   }
 
-  function onBuyStock() {}
+  function onBuyStock() {
+    buyStock = undefined;
+  }
 </script>
 
 <main>
-  <h1>The Game</h1>
+  <h1>Digital Broker</h1>
   <h2>Money: {gameStateCopy.money}$</h2>
 
   <h2>Stocks:</h2>
   {#each gameStateCopy.stocks as stock}
     <p>{stock.name}</p>
     <p>Price at buy: {stock.priceAtBuy}$</p>
+    <p>Price now: {stock.currentPrice}$</p>
   {/each}
 
   <StockSearch {onClickStock} />

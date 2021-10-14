@@ -21,7 +21,7 @@
 <main>
   <form on:submit|preventDefault={startGame}>
     <p>How much money do you want to start with?</p>
-    <input type="number" bind:value={startMoney} />
+    <input type="number" min="0" bind:value={startMoney} />
     <button type="submit">Start Trading!</button>
   </form>
 </main>

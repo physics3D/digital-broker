@@ -29,6 +29,7 @@
       symbol: stock.symbol,
       name: stock.description,
       priceAtBuy: currentPrice,
+      currentPrice: currentPrice,
     });
 
     gameState.set(localGameState);
@@ -58,8 +59,8 @@
     bind:value={numberOfStocks}
   />
 
-  <p>Total money: {totalMoney}</p>
-  <p>Money left after the purchase: {moneyLeft}</p>
+  <p>Total money: {totalMoney}$</p>
+  <p>Money left after the purchase: {moneyLeft}$</p>
 
   <button disabled={cantBuyStocks} on:click={buyStock}>Buy</button>
 </main>
