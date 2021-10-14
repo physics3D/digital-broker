@@ -1,5 +1,6 @@
 <script lang="ts">
   import { APIStock, getStockPrice, getWidgetURL } from "../api/api";
+  import StockPriceWidget from "./StockPriceWidget.svelte";
 
   export let stock: APIStock;
   export let onClickBuy;
@@ -10,11 +11,7 @@
 
 <main>
   <h2>{stock.description}</h2>
-  <iframe
-    title={stock.symbol}
-    src={getWidgetURL(stock.symbol)}
-    frameborder="0"
-  />
+  <StockPriceWidget symbol={stock.symbol} />
 
   <h2>Current price: {currentPrice}$</h2>
 

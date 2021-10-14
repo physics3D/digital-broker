@@ -12,6 +12,7 @@ export interface Stock {
     name: string;
     priceAtBuy: number;
     currentPrice: number;
+    count: number;
 }
 
 export let gameState: Writable<GameState>;
