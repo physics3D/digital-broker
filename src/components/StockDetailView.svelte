@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { APIStock, getStockPrice, getWidgetURL } from "../api/api";
+  import { APIStock, getStockPrice } from "../api/api";
   import StockPriceWidget from "./StockPriceWidget.svelte";
 
   export let stock: APIStock;

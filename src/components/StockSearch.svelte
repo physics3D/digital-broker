@@ -32,6 +32,8 @@
 
   {#await stockListPromise}
     <p>Downloading a list of available stocks...</p>
+  {:catch}
+    <p>Failed. Please check your internet connection.</p>
   {/await}
 
   <table>
