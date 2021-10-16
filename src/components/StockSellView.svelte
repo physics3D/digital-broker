@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { getStockPrice, getWidgetURL } from "../api/api";
-
   import { gameState, GameState, Stock } from "../stores/stores";
   import StockPriceWidget from "./StockPriceWidget.svelte";
 

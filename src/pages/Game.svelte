@@ -54,7 +54,7 @@
 
   <h2>Stocks:</h2>
   {#each gameStateCopy.stocks as stock}
-    <StockView {stock} {onClickSell} />
+    <StockView {stock} {onClickSell} onClickDetails={onClickStock} />
   {/each}
 
   <StockSearch {onClickStock} />
