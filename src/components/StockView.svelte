@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { APIStock } from "../api/api";
+  import type { APIStock } from "src/api/api";
 
-  import type { Stock } from "../stores/stores";
+  import type { Stock } from "src/stores/stores";
 
   export let stock: Stock;
   export let onClickSell;

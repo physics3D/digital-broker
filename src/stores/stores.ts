@@ -1,5 +1,6 @@
-import { Writable, writable } from "svelte/store";
-import { APIStock, getStockPrice } from "../api/api";
+import type { Writable } from "svelte/store";
+import { writable } from "svelte/store";
+import { getStockPrice } from "../api/api";
 
 export interface GameState {
     gameStarted: boolean;
