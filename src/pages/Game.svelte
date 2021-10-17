@@ -7,6 +7,7 @@
   import { GameState, gameState, Stock } from "../stores/stores";
   import StockView from "../components/StockView.svelte";
   import StockSellView from "../components/StockSellView.svelte";
+  import Money from "../components/Money.svelte";
 
   let gameStateCopy: GameState;
 
@@ -18,6 +19,7 @@
     gameState.set({
       gameStarted: false,
       money: 50000,
+      startMoney: 50000,
       stocks: [],
     });
   }
@@ -35,7 +37,11 @@
     detailedStock = undefined;
   }
 
-  function onBuyStock() {
+  function onDetailClose() {
+    detailedStock = undefined;
+  }
+
+  function onBuyClose() {
     buyStock = undefined;
   }
 
@@ -43,35 +49,46 @@
     sellStock = stock;
   }
 
-  function onSellStock() {
+  function onSellClose() {
     sellStock = undefined;
   }
 </script>
 
-<main>
-  <h1>Digital Broker</h1>
-  <h2>Money: {gameStateCopy.money}$</h2>
+<div class="flex flex-col items-center">
+  <h1 class="text-center text-4xl font-light m-2">Digital Broker</h1>
+  <div class="shadow-lg border rounded-lg container p-3 m-3">
+    <Money />
 
-  <h2>Stocks:</h2>
-  {#each gameStateCopy.stocks as stock}
-    <StockView {stock} {onClickSell} onClickDetails={onClickStock} />
-  {/each}
+    <h2>Stocks:</h2>
+    <div class="flex flex-row flex-wrap">
+      {#if gameStateCopy.stocks.length > 0}
+        {#each gameStateCopy.stocks as stock}
+          <StockView {stock} {onClickSell} onClickDetails={onClickStock} />
+        {/each}
+      {:else}
+        <p>You haven't bought any stocks yet.</p>
+      {/if}
+    </div>
+  </div>
 
   <StockSearch {onClickStock} />
 
-  {#if detailedStock !== undefined}
-    <StockDetailView stock={detailedStock} {onClickBuy} />
-  {/if}
-
-  {#if buyStock !== undefined}
-    <StockBuyView stock={buyStock} {onBuyStock} />
-  {/if}
-
-  {#if sellStock !== undefined}
-    <StockSellView stock={sellStock} {onSellStock} />
-  {/if}
-
   <form on:submit|preventDefault={resetGame}>
-    <button type="submit">Reset the Game</button>
+    <button
+      class="block mx-auto my-2 self-center border rounded-full shadow p-2 bg-gray-400"
+      type="submit">Reset the Game</button
+    >
   </form>
-</main>
+</div>
+
+{#if detailedStock !== undefined}
+  <StockDetailView stock={detailedStock} {onClickBuy} {onDetailClose} />
+{/if}
+
+{#if buyStock !== undefined}
+  <StockBuyView stock={buyStock} {onBuyClose} />
+{/if}
+
+{#if sellStock !== undefined}
+  <StockSellView stock={sellStock} {onSellClose} />
+{/if}

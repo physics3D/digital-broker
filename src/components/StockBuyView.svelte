@@ -3,7 +3,7 @@
   import { gameState, GameState } from "../stores/stores";
 
   export let stock: APIStock;
-  export let onBuyStock;
+  export let onBuyClose;
 
   let gameStateCopy: GameState;
   gameState.subscribe((value) => (gameStateCopy = value));
@@ -35,33 +35,45 @@
 
     gameState.set(localGameState);
 
-    onBuyStock();
+    onBuyClose();
   }
 </script>
 
-<main>
-  <h2>{stock.description}</h2>
-  <h2>Current price: {currentPrice}$</h2>
+<div
+  class="fixed w-full h-full left-0 top-0 bg-opacity-75 bg-black flex justify-center items-center"
+>
+  <div
+    class="bg-opacity-100 bg-white shadow-lg border rounded-lg p-3 m-3 flex flex-col items-center"
+  >
+    <button on:click={onBuyClose}>x</button>
+    <h2>{stock.description}</h2>
+    <h2>Current price: {currentPrice}$</h2>
 
-  {#if cantBuyStocks}
-    <p>You don't have enough money to buy so many stocks.</p>
-  {/if}
+    {#if cantBuyStocks}
+      <p>You don't have enough money to buy so many stocks.</p>
+    {/if}
 
-  <input
-    type="range"
-    min="1"
-    max={Math.floor(gameStateCopy.money / currentPrice)}
-    bind:value={numberOfStocks}
-  />
-  <input
-    type="number"
-    min="1"
-    max={Math.floor(gameStateCopy.money / currentPrice)}
-    bind:value={numberOfStocks}
-  />
+    <input
+      type="range"
+      min="1"
+      max={Math.floor(gameStateCopy.money / currentPrice)}
+      bind:value={numberOfStocks}
+    />
+    <input
+      type="number"
+      min="1"
+      max={Math.floor(gameStateCopy.money / currentPrice)}
+      bind:value={numberOfStocks}
+    />
 
-  <p>Total cost: {totalMoney}$</p>
-  <p>Money left after the purchase: {moneyLeft}$</p>
+    <p>Total cost: {totalMoney}$</p>
+    <p>Money left after the purchase: {moneyLeft}$</p>
 
-  <button disabled={cantBuyStocks} on:click={buyStock}>Buy</button>
-</main>
+    <button
+      disabled={cantBuyStocks}
+      on:click={buyStock}
+      class="block mx-auto my-2 px-4 self-center border rounded-full shadow p-2 bg-gray-400"
+      >Buy</button
+    >
+  </div>
+</div>

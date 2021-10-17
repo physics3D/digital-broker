@@ -11,7 +11,7 @@
   }
 </script>
 
-<main>
+<div>
   <p bind:this={loadingMessage}>Loading price widget...</p>
 
   <iframe
@@ -21,4 +21,4 @@
     on:load={hideLoadingMessage}
     bind:this={priceWidget}
   />
-</main>
+</div>

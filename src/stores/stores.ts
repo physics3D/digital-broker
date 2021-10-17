@@ -5,6 +5,7 @@ import { getStockPrice } from "../api/api";
 export interface GameState {
     gameStarted: boolean;
     money: number;
+    startMoney: number;
     stocks: Stock[];
 }
 
