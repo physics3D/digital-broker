@@ -21,10 +21,10 @@
 </script>
 
 <div>
-  <h2 class="text-center text-4xl font-light">{totalMoney}$</h2>
+  <h1 class="text-center text-4xl font-light">{totalMoney}$</h1>
   <div class="flex flex-row justify-center">
-    <p class="mx-4 text-center text-xl font-light">{profit}$</p>
-    <p class="mx-4 text-center text-xl font-light">{profitPercentage}%</p>
+    <h2>{profit}$</h2>
+    <h2>{profitPercentage}%</h2>
   </div>
 
   <p class="text-center text-xl font-light">

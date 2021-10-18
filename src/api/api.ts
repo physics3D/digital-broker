@@ -1,10 +1,14 @@
 let apiKey: string = "c5itmc2ad3ifq3te92jg";
 let baseUrl: string = "https://finnhub.io/api/v1/"
 
+let watermarkColor = "%231db954";
+let backgroundColor = "%23222222";
+let textColor = "white";
+
 
 // get the URL to a widget that shows the price development of the specific stock
 export function getWidgetURL(symbol: string) {
-    return "https://widget.finnhub.io/widgets/stocks/chart?symbol=" + symbol;
+    return "https://widget.finnhub.io/widgets/stocks/chart?symbol=" + symbol + "&watermarkColor=" + watermarkColor + "&backgroundColor=" + backgroundColor + "&textColor=" + textColor;
 }
 
 function queryAPI(query: string): Promise<any> {

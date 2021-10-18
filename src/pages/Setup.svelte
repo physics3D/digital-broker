@@ -29,10 +29,6 @@
       bind:value={startMoney}
       class="border rounded p-1"
     />
-    <button
-      type="submit"
-      class="block mx-auto my-2 self-center border rounded-full shadow p-2 bg-gray-400"
-      >Start Trading!</button
-    >
+    <button type="submit">Start Trading!</button>
   </form>
 </div>

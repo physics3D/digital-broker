@@ -2,3 +2,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  h2 {
+    @apply mx-4 text-center text-xl font-light;
+  }
+
+  button {
+    @apply m-2 px-4 border rounded-full shadow p-2 bg-gray-400;
+  }
+
+  input[type="text"] {
+    @apply border outline-none focus:border-blue-300 rounded shadow-sm text-lg px-1;
+  }
+
+  .card {
+    @apply shadow-lg border rounded-lg container p-3 m-3;
+  }
+
+  .undecorated-button {
+    @apply bg-white shadow-none border-none m-auto p-0;
+  }
+}

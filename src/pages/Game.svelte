@@ -56,11 +56,11 @@
 
 <div class="flex flex-col items-center">
   <h1 class="text-center text-4xl font-light m-2">Digital Broker</h1>
-  <div class="shadow-lg border rounded-lg container p-3 m-3">
+  <div class="card">
     <Money />
 
     <h2>Stocks:</h2>
-    <div class="flex flex-row flex-wrap">
+    <div class="flex flex-col lg:flex-row lg:flex-wrap">
       {#if gameStateCopy.stocks.length > 0}
         {#each gameStateCopy.stocks as stock}
           <StockView {stock} {onClickSell} onClickDetails={onClickStock} />
@@ -74,10 +74,7 @@
   <StockSearch {onClickStock} />
 
   <form on:submit|preventDefault={resetGame}>
-    <button
-      class="block mx-auto my-2 self-center border rounded-full shadow p-2 bg-gray-400"
-      type="submit">Reset the Game</button
-    >
+    <button type="submit">Reset the Game</button>
   </form>
 </div>
 

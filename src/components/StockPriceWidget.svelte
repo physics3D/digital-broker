@@ -11,7 +11,7 @@
   }
 </script>
 
-<div>
+<div class="flex flex-grow">
   <p bind:this={loadingMessage}>Loading price widget...</p>
 
   <iframe
@@ -20,5 +20,6 @@
     frameborder="0"
     on:load={hideLoadingMessage}
     bind:this={priceWidget}
+    class="flex-grow"
   />
 </div>
