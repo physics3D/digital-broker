@@ -37,7 +37,10 @@
       <tr>
         <td>
           <!-- undo the default styling for this button -->
-          <button on:click={onClickStock(stock)} class="undecorated-button">
+          <button
+            on:click={onClickStock(stock)}
+            class="bg-white shadow-none border-none m-auto p-0 active:bg-white"
+          >
             {stock.description}
           </button>
         </td>

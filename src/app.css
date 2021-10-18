@@ -9,7 +9,11 @@
   }
 
   button {
-    @apply m-2 px-4 border rounded-full shadow p-2 bg-gray-400;
+    @apply m-2 px-4 border rounded-full shadow p-2 bg-gray-400 outline-none;
+  }
+
+  button:active {
+    @apply bg-gray-600;
   }
 
   input[type="text"] {
@@ -18,9 +22,5 @@
 
   .card {
     @apply shadow-lg border rounded-lg container p-3 m-3;
-  }
-
-  .undecorated-button {
-    @apply bg-white shadow-none border-none m-auto p-0;
   }
 }
