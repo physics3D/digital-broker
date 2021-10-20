@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { roundToTwoDigits } from "../util/util";
+
   import { APIStock, getStockPrice, getWidgetURL } from "../api/api";
   import { gameState, GameState } from "../stores/stores";
   import Window from "./Window.svelte";
@@ -18,14 +20,14 @@
   let cantBuyStocks: boolean;
 
   $: {
-    totalMoney = numberOfStocks * currentPrice;
-    moneyLeft = gameStateCopy.money - totalMoney;
+    totalMoney = roundToTwoDigits(numberOfStocks * currentPrice);
+    moneyLeft = roundToTwoDigits(gameStateCopy.money - totalMoney);
     cantBuyStocks = totalMoney > gameStateCopy.money;
   }
 
   function buyStock() {
     let localGameState = gameStateCopy;
-    localGameState.money -= totalMoney;
+    localGameState.money = roundToTwoDigits(localGameState.money - totalMoney);
     localGameState.stocks.push({
       symbol: stock.symbol,
       name: stock.description,

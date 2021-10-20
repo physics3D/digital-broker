@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { roundToTwoDigits } from "../util/util";
+
   import { gameState, GameState, Stock } from "../stores/stores";
   import StockPriceWidget from "./StockPriceWidget.svelte";
   import Window from "./Window.svelte";
@@ -15,12 +17,16 @@
 
   $: {
     cantSellSoManyStocks = stockSellCount > stock.count;
-    moneyAfterSell = gameStateCopy.money + stockSellCount * stock.currentPrice;
+    moneyAfterSell = roundToTwoDigits(
+      gameStateCopy.money + stockSellCount * stock.currentPrice
+    );
   }
 
   function sellStock() {
     let localGameState = gameStateCopy;
-    localGameState.money += stockSellCount * stock.currentPrice;
+    localGameState.money = roundToTwoDigits(
+      localGameState.money + stockSellCount * stock.currentPrice
+    );
 
     if (stock.count === stockSellCount) {
       localGameState.stocks.splice(localGameState.stocks.indexOf(stock), 1);

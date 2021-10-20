@@ -12,8 +12,12 @@
   let foundStocks: APIStock[];
 
   $: {
-    foundStocks = stockList.filter((stock) =>
-      stock.description.startsWith(stockQuery.toUpperCase())
+    stockQuery = stockQuery.toUpperCase();
+
+    foundStocks = stockList.filter(
+      (stock) =>
+        stock.description.startsWith(stockQuery) ||
+        stock.symbol.startsWith(stockQuery)
     );
 
     if (foundStocks.length > 10) {
@@ -24,7 +28,7 @@
 
 <div class="card">
   <h2>Buy stocks:</h2>
-  <input type="text" bind:value={stockQuery} />
+  <input type="text" placeholder="Search for stocks" bind:value={stockQuery} />
 
   {#await stockListPromise}
     <p>Downloading a list of available stocks...</p>
@@ -41,7 +45,7 @@
             on:click={onClickStock(stock)}
             class="bg-white shadow-none border-none m-auto p-0 active:bg-white"
           >
-            {stock.description}
+            {stock.description} ({stock.symbol})
           </button>
         </td>
       </tr>

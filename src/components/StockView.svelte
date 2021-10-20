@@ -1,19 +1,23 @@
 <script lang="ts">
-  import type { APIStock } from "src/api/api";
-
-  import type { Stock } from "src/stores/stores";
+  import type { Stock } from "../stores/stores";
+  import {
+    getSign,
+    getTextColor,
+    roundToTwoDigits,
+    stockToAPIStock,
+  } from "../util/util";
 
   export let stock: Stock;
   export let onClickSell;
   export let onClickDetails;
 
-  function stockToAPIStock(stockToConvert: Stock): APIStock {
-    return {
-      description: stock.name,
-      symbol: stock.symbol,
-      displaySymbol: stock.symbol,
-      type: "Common Stock",
-    };
+  let profit: number;
+  let profitPercentage: number;
+
+  $: {
+    profit = roundToTwoDigits(stock.currentPrice - stock.priceAtBuy);
+
+    profitPercentage = roundToTwoDigits((profit / stock.priceAtBuy) * 100);
   }
 </script>
 
@@ -21,8 +25,15 @@
   class="shadow-lg border rounded-lg p-3 m-3 inline-flex flex-col items-center"
 >
   <p>{stock.count}x {stock.name}</p>
-  <p>Price at buy: {stock.priceAtBuy}$</p>
-  <p>Price now: {stock.currentPrice}$</p>
+  <p>{stock.currentPrice}$</p>
+  <div class="flex flex-row justify-center">
+    <p class={"m-1 p-1 " + getTextColor(profit)}>
+      {getSign(profit) + profit}$
+    </p>
+    <p class={"m-1 p-1 " + getTextColor(profitPercentage)}>
+      {getSign(profitPercentage) + profitPercentage}%
+    </p>
+  </div>
   <div class="flex flex-row">
     <button on:click={onClickDetails(stockToAPIStock(stock))}>Details</button>
     <button on:click={onClickSell(stock)}>Sell</button>
