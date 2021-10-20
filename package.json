@@ -5,10 +5,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "postbuild": "npm run gen-favicon",
     "serve": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "gen-favicon": "png-to-ico assets/logo.png > public/favicon.ico"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
@@ -16,6 +18,7 @@
     "autoprefixer": "^10.3.7",
     "cssnano": "^5.0.8",
     "gh-pages": "^3.2.3",
+    "png-to-ico": "^2.1.2",
     "postcss": "^8.3.9",
     "postcss-load-config": "^3.1.0",
     "svelte": "^3.37.0",
