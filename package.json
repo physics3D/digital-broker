@@ -4,16 +4,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "npm run gen-icons",
     "build": "vite build",
-    "postbuild": "npm run gen-sw",
+    "postbuild": "npm run gen-icons && npm run gen-sw",
     "clean": "rimraf dist",
     "serve": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "gen-sw": "workbox generateSW workbox-config.cjs",
-    "gen-icons": "pwa-asset-generator assets/logo.png public/icons -i index.html -m public/manifest.json --maskable false"
+    "gen-icons": "pwa-asset-generator assets/logo.png dist/icons -i dist/index.html -m dist/manifest.json --maskable false"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
