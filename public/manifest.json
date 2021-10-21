@@ -1,7 +1,7 @@
 {
   "name": "Digital Broker",
   "short_name": "Digital Broker",
-  "start_url": "/digital-broker",
+  "start_url": "/digital-broker/index.html",
   "icons":[],
   "theme_color": "#FFFFFF",
   "background_color": "#FFFFFF",
