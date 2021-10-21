@@ -25,7 +25,7 @@
   class="shadow-lg border rounded-lg p-3 m-3 inline-flex flex-col items-center"
 >
   <p>{stock.count}x {stock.name}</p>
-  <p>{stock.currentPrice}$</p>
+  <p>{roundToTwoDigits(stock.count * stock.currentPrice)}$</p>
   <div class="flex flex-row justify-center">
     <p class={"m-1 p-1 " + getTextColor(profit)}>
       {getSign(profit) + profit}$
