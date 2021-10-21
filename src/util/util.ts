@@ -16,7 +16,7 @@ export function roundToTwoDigits(num: number): number {
 
 export function getSign(num: number): string {
     if (num < 0) {
-        return "-";
+        return "";
     } else {
         return "+";
     }
