@@ -4,13 +4,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "npm run gen-icons",
     "build": "vite build",
-    "postbuild": "npm run gen-favicon",
+    "postbuild": "npm run gen-sw",
+    "clean": "rimraf dist",
     "serve": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "gen-favicon": "png-to-ico assets/logo.png > public/favicon.ico"
+    "gen-sw": "workbox generateSW workbox-config.cjs",
+    "gen-icons": "pwa-asset-generator assets/logo.png public/icons -i index.html -m public/manifest.json --maskable false"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
@@ -18,15 +21,17 @@
     "autoprefixer": "^10.3.7",
     "cssnano": "^5.0.8",
     "gh-pages": "^3.2.3",
-    "png-to-ico": "^2.1.2",
     "postcss": "^8.3.9",
     "postcss-load-config": "^3.1.0",
+    "pwa-asset-generator": "^5.0.0",
+    "rimraf": "^3.0.2",
     "svelte": "^3.37.0",
     "svelte-check": "^2.1.0",
     "svelte-preprocess": "^4.9.8",
     "tailwindcss": "^2.2.16",
     "tslib": "^2.2.0",
     "typescript": "^4.3.2",
-    "vite": "^2.6.4"
+    "vite": "^2.6.4",
+    "workbox-cli": "^6.3.0"
   }
 }
