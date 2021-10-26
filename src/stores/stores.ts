@@ -19,6 +19,19 @@ export interface Stock {
 
 export let gameState: Writable<GameState>;
 
+function updateBoughtStocksPrices() {
+    let gameStateCopy;
+    gameState.subscribe((value) => gameStateCopy = value);
+
+    let localGameState = gameStateCopy;
+
+    localGameState.stocks.forEach(stock => {
+        getStockPrice(stock.symbol).then(price => stock.currentPrice = price);
+    });
+
+    gameState.set(localGameState);
+}
+
 export function initStores() {
     gameState = writable(JSON.parse(localStorage.getItem("gameState")) || {
         gameStarted: false,
@@ -30,15 +43,11 @@ export function initStores() {
         localStorage.setItem("gameState", JSON.stringify(value));
     });
 
-    let gameStateCopy: GameState;
-    gameState.subscribe(value => gameStateCopy = value);
+    // set clock to update the prices of all bought stocks
+    // do it manually first because setInterval waits 1 min before running the code
+    updateBoughtStocksPrices();
 
     setInterval(() => {
-        let localGameState = gameStateCopy;
-        localGameState.stocks.forEach(stock => {
-            getStockPrice(stock.symbol).then(price => stock.currentPrice = price);
-        });
-
-        gameState.set(localGameState);
+        updateBoughtStocksPrices();
     }, 60000);
 }
