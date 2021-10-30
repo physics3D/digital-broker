@@ -5,13 +5,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "postbuild": "npm run gen-icons && npm run gen-sw",
+    "postbuild": "npm run gen-icons",
     "clean": "rimraf dist",
     "serve": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "gen-sw": "workbox generateSW workbox-config.cjs",
     "gen-icons": "pwa-asset-generator assets/logo.png dist/icons -i dist/index.html -m dist/manifest.json --maskable false --favicon"
   },
   "devDependencies": {
@@ -30,7 +29,6 @@
     "tailwindcss": "^2.2.16",
     "tslib": "^2.2.0",
     "typescript": "^4.3.2",
-    "vite": "^2.6.4",
-    "workbox-cli": "^6.3.0"
+    "vite": "^2.6.4"
   }
 }
