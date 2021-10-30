@@ -19,35 +19,42 @@ export interface Stock {
 
 export let gameState: Writable<GameState>;
 
-function updateBoughtStocksPrices() {
-    let gameStateCopy;
+function updateStocks() {
+    let gameStateCopy: GameState;
     gameState.subscribe((value) => gameStateCopy = value);
 
-    let localGameState = gameStateCopy;
+    let localGameState: GameState = gameStateCopy;
 
-    localGameState.stocks.forEach(stock => {
-        getStockPrice(stock.symbol).then(price => stock.currentPrice = price);
+    localGameState.stocks.forEach(async stock => {
+        stock.currentPrice = await getStockPrice(stock.symbol);
     });
 
     gameState.set(localGameState);
+
 }
 
 export function initStores() {
-    gameState = writable(JSON.parse(localStorage.getItem("gameState")) || {
+    let initialGameState: GameState = JSON.parse(localStorage.getItem("gameState")) || {
         gameStarted: false,
         money: 0,
         stocks: []
-    });
+    };
+
+    gameState = writable(initialGameState);
+
+    // somehow you have to wrap it in an arrow function
+    let initialUpdate = () => {
+        initialGameState.stocks.forEach(async (stock) => {
+            stock.currentPrice = await getStockPrice(stock.symbol);
+        })
+    };
+
+    initialUpdate();
 
     gameState.subscribe((value) => {
         localStorage.setItem("gameState", JSON.stringify(value));
     });
 
     // set clock to update the prices of all bought stocks
-    // do it manually first because setInterval waits 1 min before running the code
-    updateBoughtStocksPrices();
-
-    setInterval(() => {
-        updateBoughtStocksPrices();
-    }, 60000);
+    setInterval(updateStocks, 1000);
 }
