@@ -11,5 +11,10 @@
     <div id="app">
       <script type="module" src="/src/main.ts"></script>
     </div>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("sw.js");
+      }
+    </script>
   </body>
 </html>

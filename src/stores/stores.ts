@@ -26,7 +26,7 @@ function updateStocks() {
     let localGameState: GameState = gameStateCopy;
 
     localGameState.stocks.forEach(async stock => {
-        stock.currentPrice = await getStockPrice(stock.symbol);
+        stock.currentPrice = await getStockPrice(stock.symbol) || stock.currentPrice;
     });
 
     gameState.set(localGameState);
@@ -45,7 +45,7 @@ export function initStores() {
     // somehow you have to wrap it in an arrow function
     let initialUpdate = () => {
         initialGameState.stocks.forEach(async (stock) => {
-            stock.currentPrice = await getStockPrice(stock.symbol);
+            stock.currentPrice = await getStockPrice(stock.symbol) || stock.currentPrice;
         })
     };
 
