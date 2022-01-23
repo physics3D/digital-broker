@@ -1,0 +1,30 @@
+dev:
+  - shell: npx vite
+
+build:
+  - parallel:
+    - task: compile
+    - task: gen-icons
+  - task: gen-sw
+
+clean:
+  - shell: rm -r dist
+
+serve:
+  - shell: npx vite preview
+
+check:
+  - shell: npx svelte-check --tsconfig ./tsconfig.json
+
+compile:
+  - shell: npx vite build
+
+gen-icons:
+  - shell: npx pwa-asset-generator assets/logo.png dist/icons -i dist/index.html -m dist/manifest.json --maskable false --favicon
+
+gen-sw:
+  - shell: npx workbox generateSW workbox-config.cjs
+
+deploy:
+  - task: build
+  - shell: npx gh-pages -d dist
